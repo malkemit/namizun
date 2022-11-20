@@ -1,0 +1,5 @@
+psutil==5.9.4
+colored~=1.4.4
+pyfiglet~=0.8.post1
+prettytable~=3.5.0
+redis~=4.3.4
