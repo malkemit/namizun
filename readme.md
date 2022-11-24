@@ -12,7 +12,7 @@ This project is used to remove the limitation of asymmetric ratio for uploading 
 sudo apt install python3-pip python3-venv redis git -y
 ```
 
-- 2\) you need to create a directory to clone the project :
+- 2\) you need to create a directory to clone the project:
 
 ```bash
 mkdir /var/www/namizun && cd /var/www/namizun
@@ -44,7 +44,7 @@ python3 -m venv /var/www/namizun/venv
 source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install . && deactivate
 ```
 
-- 6\) Create service for core.py (for running namizun script):
+- 6\) Create service for uploader.py (for running namizun script):
 
 ```bash
 ln -s /var/www/namizun/else/namizun.service /etc/systemd/system/
@@ -57,7 +57,7 @@ following command:
 rm /etc/systemd/system/namizun.service
 ```
 
-then use **ln** command
+Then enter the command of step 6 (**ln** command)
 
 - 7\) Reload the service files to include the new service:
 
@@ -77,7 +77,7 @@ sudo systemctl enable namizun.service
 sudo systemctl start namizun.service
 ```
 
-- 10\) Make command for namizun menu.py
+- 10\) Create **namizun** command to execute **menu.py**
 
 ```bash
 ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/namizun
@@ -85,7 +85,7 @@ ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/n
 
 ## Configuration
 
-- You can use **menu.py** tool to configure monitoring. Type the following command to run it:
+- You can use **namizun** tool to configure monitoring. Type the following command to run it:
 
 ```bash
 namizun
@@ -114,7 +114,7 @@ sudo systemctl restart namizun.service
 
 
 - 3\) Coefficient: By entering the number 3, you can enter the limit announced by the provider.\
-  For example, if your ratio should be 10 uploads to 1 download, set the number to 1
+  For example, if your ratio should be 10 uploads to 1 download, set the number to 10
 
 
   **Important: Your upload and download information will be counted from your last reboot.**\
@@ -126,10 +126,29 @@ sudo systemctl restart namizun.service
   provider panel and enter the correct amount)
 
 
-- 5\) Total Download Before Reboot: By entering the number 4, you can change your download amount
+- 5\) Total Download Before Reboot: By entering the number 5, you can change your download amount
 
 
 - 0\) Exit: goodbye!
+
+## Notes:
+- In this script, you don't need to buy a download host or another server or even upload to your foreign server.\
+Only fake traffic will be sent to **Iranian IPs**, which will be lost!
+
+
+- Although the essence of this script is used to attack, but due to the **limited size of the buffer** and the **distribution of traffic between different IPs**, this does not happen in practice.\
+(To attack, many servers must send traffic to one IP, but **this works exactly the opposite**)
+
+
+- This script is designed to upload up to **50** terabytes of traffic at maximum, it can be used on a server with minimal resources.
+
+
+- If you want to use a speed of more than 3, be sure to pay attention to the **CPU consumption**.\
+High CPU consumption will cause restrictions from the provider (it is better to have at least 2 CPU cores)
+
+
+- If you are using a **dedicated server**, it is suggested to virtualize it and use your virtual servers.\
+In this way, your traffic will be distributed among more IPs and will prevent you from being banned.
 
 ## Donate:
 
