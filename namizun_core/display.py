@@ -1,5 +1,5 @@
 from os import system
-from colored import attr, fg
+from colored import fg
 from pyfiglet import Figlet
 
 cornsilk = fg("cornsilk_1")
@@ -8,7 +8,7 @@ gold = fg("gold_1")
 green = fg("green")
 magenta = fg("magenta")
 red = fg("light_red")
-reset = attr("reset")
+reset = fg("white")
 yellow = fg("yellow")
 
 

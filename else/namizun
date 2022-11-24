@@ -1,0 +1,1 @@
+source /var/www/namizun/venv/bin/activate && python3 /var/www/namizun/menu.py && deactivate

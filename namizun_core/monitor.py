@@ -1,7 +1,6 @@
-import config
 from prettytable import PrettyTable
 from psutil import net_io_counters, cpu_percent
-import display
+from namizun_core import display, database
 from time import sleep
 
 
@@ -14,13 +13,13 @@ def get_size(only_bytes):
 
 def get_network_io():
     io = net_io_counters()
-    return io.bytes_sent + config.get_parameter('total_upload_before_reboot') \
-        , io.bytes_recv + config.get_parameter('total_download_before_reboot')
+    return io.bytes_sent + database.get_parameter('total_upload_before_reboot') \
+        , io.bytes_recv + database.get_parameter('total_download_before_reboot')
 
 
 def total_upload_color(total_upload, total_download):
-    value = max(0, (config.get_parameter('coefficient') - total_upload / total_download)) / \
-            config.get_parameter('coefficient') * 100
+    value = max(0, (database.get_parameter('coefficient') - total_upload / total_download)) / \
+            database.get_parameter('coefficient') * 100
     if 66 <= value <= 100:
         return display.red + get_size(total_upload) + display.cornsilk
     elif 33 <= value < 66:
@@ -80,10 +79,10 @@ def monitor():
     sleep(1)
     while True:
         sleep(1)
-        if config.get_parameter('in_submenu') is None:
+        if database.get_parameter('in_submenu') is None:
             display.clear()
             return exit()
-        if config.get_parameter('in_submenu') is False:
+        if database.get_parameter('in_submenu') is False:
             display.line_jumper(-14)
             display.line_remover(5)
             new_bytes_sent, new_bytes_recv = get_network_io()
