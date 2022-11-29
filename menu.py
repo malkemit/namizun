@@ -36,7 +36,7 @@ def coefficient_setter():
     print(f"\n{display.cornsilk}What is your limit coefficient?"
           f"(max = {display.cyan}12{display.cornsilk}, min = {display.cyan}3{display.cornsilk})\n")
     selection = int(input(f"\n{display.cyan}3{display.cornsilk} to {display.cyan}12{display.cornsilk}?"))
-    if selection in range(3, 13):
+    if selection in range(1, 13):
         database.set_parameter('coefficient', selection)
         return main_menu()
     else:
