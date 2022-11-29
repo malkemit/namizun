@@ -15,7 +15,7 @@ sudo apt install python3-pip python3-venv redis git -y
 - 2\) you need to create a directory to clone the project:
 
 ```bash
-mkdir /var/www/namizun && cd /var/www/namizun
+mkdir -p /var/www/namizun && cd /var/www/namizun
 ```
 
 - 3\) Clone the project with Git:
