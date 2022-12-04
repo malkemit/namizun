@@ -50,15 +50,6 @@ source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install 
 ln -s /var/www/namizun/else/namizun.service /etc/systemd/system/
 ```
 
-**Note:** If you have installed the previous version, you will face the **file exists** error. Remove it with the
-following command:
-
-```bash
-rm /etc/systemd/system/namizun.service
-```
-
-Then enter the command of step 6 (**ln** command)
-
 - 7\) Reload the service files to include the new service:
 
 ```bash

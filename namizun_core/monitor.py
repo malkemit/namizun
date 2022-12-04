@@ -18,8 +18,8 @@ def get_network_io():
 
 
 def total_upload_color(total_upload, total_download):
-    value = max(0, (database.get_parameter('coefficient') - total_upload / total_download)) / \
-            database.get_parameter('coefficient') * 100
+    value = max(0, (database.get_parameter('coefficient_limitation') - total_upload / total_download)) / \
+            database.get_parameter('coefficient_limitation') * 100
     if 66 <= value <= 100:
         return display.red + get_size(total_upload) + display.cornsilk
     elif 33 <= value < 66:
@@ -65,7 +65,9 @@ def cpu_percent_color(cpu_usage_percent):
 
 
 def monitor():
-    display.banner()
+    sleep(0.2)
+    display.line_jumper(-21)
+    display.line_remover(5)
     old_bytes_sent, old_bytes_recv = get_network_io()
     namizun_monitor = PrettyTable()
     namizun_monitor.field_names = [f"{display.cyan}Σ Upload{display.cornsilk}",
@@ -74,17 +76,19 @@ def monitor():
                                    f"{display.cyan}⇩ Speed{display.cornsilk}",
                                    f"{display.cyan}% CPU{display.cornsilk}"]
     namizun_monitor.add_row([0, 0, 0, 0, 0])
-    print(f"{display.gold}--------------{display.magenta}MONITORING{display.gold}-------------\n\n{display.cornsilk}"
+    print(f"{display.gold}---------------{display.magenta}MONITORING{display.gold}--------------\n\n{display.cornsilk}"
           f"{namizun_monitor}")
-    sleep(1)
+    display.line_jumper(+17)
     while True:
         sleep(1)
         if database.get_parameter('in_submenu') is None:
             display.clear()
             return exit()
         if database.get_parameter('in_submenu') is False:
-            display.line_jumper(-14)
+            display.line_jumper(-21)
             display.line_remover(5)
+            print(
+                f"{display.gold}---------------{display.magenta}MONITORING{display.gold}--------------\n{display.cornsilk}")
             new_bytes_sent, new_bytes_recv = get_network_io()
             namizun_monitor.add_row([
                 total_upload_color(new_bytes_sent, new_bytes_recv),
@@ -94,5 +98,5 @@ def monitor():
                 cpu_percent_color(cpu_percent())])
             namizun_monitor.del_row(0)
             print(namizun_monitor)
-            display.line_jumper(+12)
+            display.line_jumper(+17)
             old_bytes_sent, old_bytes_recv = new_bytes_sent, new_bytes_recv

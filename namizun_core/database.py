@@ -1,26 +1,39 @@
-import redis
+from redis import Redis
+from os import system, path
+from random import choice
 
 parameters = [
-    'running', 'speed', 'coefficient', 'total_upload_before_reboot', 'total_download_before_reboot', 'in_submenu']
+    'range_ips', 'fake_udp_uploader_running', 'speedtest_uploader_running',
+    'coefficient_buffer_size', 'coefficient_uploader_threads_count', 'coefficient_limitation',
+    'total_upload_before_reboot', 'total_download_before_reboot', 'in_submenu']
 namizun_db = None
 prefix = 'namizun_'
-
 cache_parameters = {}
 
 
 def singleton():
     global namizun_db
     if namizun_db is None:
-        namizun_db = redis.Redis()
+        namizun_db = Redis()
     return namizun_db
 
 
 def get_default(key):
-    if key == 'running':
+    if key == 'range_ips':
+        if path.isfile('range_ips'):
+            return open('range_ips').read()
+        else:
+            system('ln -s /var/www/namizun/else/range_ips /var/www/namizun/')
+            return get_default(key)
+    elif key == 'fake_udp_uploader_running':
         return True
-    elif key == 'speed':
-        return 3
-    elif key == 'coefficient':
+    elif key == 'speedtest_uploader_running':
+        return False
+    elif key == 'coefficient_buffer_size':
+        return 2
+    elif key == 'coefficient_uploader_threads_count':
+        return 5
+    elif key == 'coefficient_limitation':
         return 10
     elif key == 'total_upload_before_reboot':
         return 0
@@ -39,8 +52,10 @@ def check_datatype(value):
         return True
     elif value == 'None':
         return None
-    else:
+    elif value.isdigit():
         return int(value)
+    else:
+        return value
 
 
 def get_parameter(key):
@@ -73,3 +88,7 @@ def get_cache_parameter(key):
 def set_parameters_to_cache():
     for key in parameters:
         cache_parameters[key] = get_parameter(key)
+
+
+def get_random_range_ip():
+    return choice(get_cache_parameter('range_ips').split('\n'))
