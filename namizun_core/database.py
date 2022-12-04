@@ -52,7 +52,7 @@ def check_datatype(value):
         return True
     elif value == 'None':
         return None
-    elif value.isdigit():
+    elif isinstance(value, str) and value.isdigit():
         return int(value)
     else:
         return value
