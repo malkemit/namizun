@@ -20,11 +20,11 @@ def singleton():
 
 def get_default(key):
     if key == 'range_ips':
-        if path.isfile('range_ips'):
-            return open('range_ips').read()
+        if path.isfile('/var/www/namizun/range_ips'):
+            return open('/var/www/namizun/range_ips').read()
         else:
             system('ln -s /var/www/namizun/else/range_ips /var/www/namizun/')
-            return get_default(key)
+            return open('/var/www/namizun/range_ips').read()
     elif key == 'fake_udp_uploader_running':
         return True
     elif key == 'speedtest_uploader_running':

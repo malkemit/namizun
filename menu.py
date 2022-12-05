@@ -84,11 +84,11 @@ def total_download_before_reboot_setter():
 
 
 def reload_namizun_service():
-    if path.isfile('range_ips'):
-        database.set_parameter('range_ips', open('range_ips').read())
+    if path.isfile('/var/www/namizun/range_ips'):
+        database.set_parameter('range_ips', open('/var/www/namizun/range_ips').read())
     else:
         system('ln -s /var/www/namizun/else/range_ips /var/www/namizun/range_ips')
-        database.set_parameter('range_ips', open('range_ips').read())
+        database.set_parameter('range_ips', open('/var/www/namizun/range_ips').read())
     system('systemctl restart namizun.service')
 
 
