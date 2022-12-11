@@ -74,6 +74,14 @@ sudo systemctl start namizun.service
 ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/namizun
 ```
 
+## Update
+
+- With the following command, you can update the script that you have already installed:
+
+```bash
+cd /var/www/namizun && rm range_ips && git reset --hard HEAD && git pull origin master && source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install . && deactivate && systemctl daemon-reload && chmod +x /usr/local/bin/namizun
+```
+
 ## Configuration
 
 - You can use **namizun** tool to configure monitoring. Type the following command to run it:

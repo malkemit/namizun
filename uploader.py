@@ -20,7 +20,7 @@ def get_network_usage():
 
 def get_uploader_count_base_timeline():
     time_in_iran = int(datetime.now(timezone("Asia/Tehran")).strftime("%H"))
-    default_uploader_count = database.get_cache_parameter('coefficient_uploader_threads_count') * 100
+    default_uploader_count = database.get_cache_parameter('coefficient_uploader_threads_count') * 10
     maximum_allowed_coefficient = [2, 1.6, 1, 0.6, 0.2, 0.1, 0.6, 1, 1.2, 1.3, 1.4, 1.5,
                                    1.3, 1.4, 1.6, 1.5, 1.3, 1.5, 1.7, 1.8, 2, 1.3, 1.5, 1.8]
     minimum_allowed_coefficient = [1.6, 1, 0.6, 0.2, 0, 0, 0.2, 0.8, 1, 1.1, 1.2, 1.3,

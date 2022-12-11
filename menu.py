@@ -35,10 +35,10 @@ def coefficient_of_buffer_size_setter():
 
 def coefficient_uploader_threads_count_setter():
     display.banner()
-    print(f"\n{display.cornsilk}Choose coefficient of uploader threads count? (max = 20, min = 1)\n\n"
+    print(f"\n{display.cornsilk}Choose coefficient of uploader threads count? (max = 30, min = 1)\n\n"
           f"{display.red}Warning: The higher the speed, the higher the CPU consumption!{display.cornsilk}\n")
-    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}20{display.cornsilk}?"))
-    if selection in range(1, 21):
+    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}30{display.cornsilk}?"))
+    if selection in range(1, 31):
         database.set_parameter('coefficient_uploader_threads_count', selection)
         return main_menu()
     else:
