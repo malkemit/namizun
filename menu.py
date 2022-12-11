@@ -1,5 +1,4 @@
 from namizun_core import display, database
-from time import sleep
 from namizun_core.monitor import get_size
 from threading import Thread
 from namizun_core.monitor import monitor

@@ -1,5 +1,5 @@
 from namizun_core import database
-from random import randint
+from random import uniform, randint
 from time import sleep
 from namizun_core.monitor import get_network_io
 from namizun_core.udp import multi_udp_uploader
@@ -10,8 +10,8 @@ from namizun_core.ip import cache_ip_ports_from_database
 
 def get_network_usage():
     upload, download = get_network_io()
-    limitation = randint(database.get_cache_parameter('coefficient_limitation') * 0.7,
-                         database.get_cache_parameter('coefficient_limitation') * 1.3)
+    limitation = int(uniform(database.get_cache_parameter('coefficient_limitation') * 0.7,
+                             database.get_cache_parameter('coefficient_limitation') * 1.3))
     difference = download * limitation - upload
     if difference < 1000000000:
         return 0
@@ -25,8 +25,8 @@ def get_uploader_count_base_timeline():
                                    1.3, 1.4, 1.6, 1.5, 1.3, 1.5, 1.7, 1.8, 2, 1.3, 1.5, 1.8]
     minimum_allowed_coefficient = [1.6, 1, 0.6, 0.2, 0, 0, 0.2, 0.8, 1, 1.1, 1.2, 1.3,
                                    1.1, 1.2, 1.5, 1.4, 1.2, 1.4, 1.5, 1.6, 1.8, 1, 1.2, 1.5]
-    return randint(minimum_allowed_coefficient[time_in_iran] * default_uploader_count,
-                   maximum_allowed_coefficient[time_in_iran] * default_uploader_count)
+    return int(uniform(minimum_allowed_coefficient[time_in_iran] * default_uploader_count,
+                       maximum_allowed_coefficient[time_in_iran] * default_uploader_count))
 
 
 while True:
