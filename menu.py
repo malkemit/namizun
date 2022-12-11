@@ -22,11 +22,11 @@ def fake_udp__uploader_running_setter():
 
 def coefficient_of_buffer_size_setter():
     display.banner()
-    print(f"\n{display.cornsilk}Choose coefficient of buffer size? (max = 5, min = 1)\n\n"
+    print(f"\n{display.cornsilk}Choose coefficient of buffer size? (max = 6, min = 1)\n\n"
           f"{display.red}Warning: The larger the buffer size, the more likely the provider will notice that "
           f"your traffic is fake, BE CAREFUL!{display.cornsilk}\n")
     selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}5{display.cornsilk}?"))
-    if selection in range(1, 6):
+    if selection in range(1, 7):
         database.set_parameter('coefficient_buffer_size', selection)
         return main_menu()
     else:
@@ -35,10 +35,10 @@ def coefficient_of_buffer_size_setter():
 
 def coefficient_uploader_threads_count_setter():
     display.banner()
-    print(f"\n{display.cornsilk}Choose coefficient of uploader threads count? (max = 25, min = 1)\n\n"
+    print(f"\n{display.cornsilk}Choose coefficient of uploader threads count? (max = 20, min = 1)\n\n"
           f"{display.red}Warning: The higher the speed, the higher the CPU consumption!{display.cornsilk}\n")
-    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}25{display.cornsilk}?"))
-    if selection in range(1, 26):
+    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}20{display.cornsilk}?"))
+    if selection in range(1, 21):
         database.set_parameter('coefficient_uploader_threads_count', selection)
         return main_menu()
     else:
@@ -62,9 +62,9 @@ def coefficient_of_limitation_setter():
 def total_upload_before_reboot_setter():
     display.banner()
     print(f"\n{display.cornsilk}How much did you upload before the last reboot?"
-          f"(max = {display.cyan}100000{display.cornsilk}GB)\n")
+          f"(max = {display.cyan}1000000{display.cornsilk}GB)\n")
     selection = int(input("\nJust enter GB amount?"))
-    if selection <= 100000:
+    if selection <= 1000000:
         database.set_parameter('total_upload_before_reboot', selection * 1024 * 1024 * 1024)
         return main_menu()
     else:
@@ -74,9 +74,9 @@ def total_upload_before_reboot_setter():
 def total_download_before_reboot_setter():
     display.banner()
     print(f"\n{display.cornsilk}How much did you download before the last reboot?"
-          f"(max = {display.cyan}10000{display.cornsilk}GB)\n")
+          f"(max = {display.cyan}100000{display.cornsilk}GB)\n")
     selection = int(input("\nJust enter GB amount?"))
-    if selection <= 10000:
+    if selection <= 100000:
         database.set_parameter('total_download_before_reboot', selection * 1024 * 1024 * 1024)
         return main_menu()
     else:
@@ -87,7 +87,7 @@ def reload_namizun_service():
     if path.isfile('/var/www/namizun/range_ips'):
         database.set_parameter('range_ips', open('/var/www/namizun/range_ips').read())
     else:
-        system('ln -s /var/www/namizun/else/range_ips /var/www/namizun/range_ips')
+        system('cp /var/www/namizun/else/range_ips /var/www/namizun/range_ips')
         database.set_parameter('range_ips', open('/var/www/namizun/range_ips').read())
     system('systemctl restart namizun.service')
 

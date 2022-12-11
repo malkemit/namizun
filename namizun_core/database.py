@@ -1,6 +1,6 @@
 from redis import Redis
 from os import system, path
-from random import choice
+from random import randint
 
 parameters = [
     'range_ips', 'fake_udp_uploader_running', 'speedtest_uploader_running',
@@ -8,7 +8,9 @@ parameters = [
     'total_upload_before_reboot', 'total_download_before_reboot', 'in_submenu']
 namizun_db = None
 prefix = 'namizun_'
+ip_prefix = prefix + 'ip_'
 cache_parameters = {}
+buffers_weight = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 
 def singleton():
@@ -23,18 +25,18 @@ def get_default(key):
         if path.isfile('/var/www/namizun/range_ips'):
             return open('/var/www/namizun/range_ips').read()
         else:
-            system('ln -s /var/www/namizun/else/range_ips /var/www/namizun/')
+            system('cp /var/www/namizun/else/range_ips /var/www/namizun/')
             return open('/var/www/namizun/range_ips').read()
     elif key == 'fake_udp_uploader_running':
         return True
     elif key == 'speedtest_uploader_running':
         return False
     elif key == 'coefficient_buffer_size':
-        return 2
+        return 1
     elif key == 'coefficient_uploader_threads_count':
-        return 5
+        return 3
     elif key == 'coefficient_limitation':
-        return 10
+        return 6
     elif key == 'total_upload_before_reboot':
         return 0
     elif key == 'total_download_before_reboot':
@@ -85,10 +87,34 @@ def get_cache_parameter(key):
         return None
 
 
+def get_buffers_weight():
+    global buffers_weight
+    result = []
+    selected_buffer_size = 2 * get_cache_parameter('coefficient_buffer_size') - 1
+    for buffer_size in range(1, 14):
+        result.append(1 / 2 ** abs(buffer_size - selected_buffer_size))
+    buffers_weight = result
+
+
 def set_parameters_to_cache():
     for key in parameters:
         cache_parameters[key] = get_parameter(key)
+    get_buffers_weight()
 
 
-def get_random_range_ip():
-    return choice(get_cache_parameter('range_ips').split('\n'))
+def set_ip_port_to_database(target_ip, target_port):
+    my_db = singleton()
+    my_db.set(ip_prefix + target_ip, str(target_port), ex=randint(600, 6000))
+
+
+def get_ip_ports_from_database():
+    my_db = singleton()
+    result = {}
+    keys = my_db.keys(ip_prefix)
+    if len(keys) > 0:
+        for key in keys:
+            if isinstance(key, bytes):
+                key = key.decode('UTF-8')
+            ip = key.split('_')[-1]
+            result[ip] = check_datatype(my_db.get(ip_prefix + ip))
+    return result

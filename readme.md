@@ -41,7 +41,7 @@ python3 -m venv /var/www/namizun/venv
 - 5\) Install the project requirements with pip by **setup.py**:
 
 ```bash
-source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install . && deactivate
+source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install wheel && pip install . && deactivate
 ```
 
 - 6\) Create service for uploader.py (for running namizun script):
@@ -96,15 +96,22 @@ sudo systemctl restart namizun.service
 
 ![menu.py](else/menu.png?raw=true)
 
-- 1\) Uploader Running : You can activate or deactivate the uploader by entering the number 1
+- 1\) Fake udp uploader running : You can activate or deactivate the uploader by entering the number 1\
 
 
-- 2\) Speed: By entering the number 2, you can specify the speed of the uploader.(max=5 normal=3 min=1)\
-  **Note:** that the higher the number, the higher the *CPU consumption* and the sending of *larger buffers*, and the
-  possibility of being *speed limited* by the **provider**.
+- 2\) Speedtest uploader running: It is currently not active and will be added soon\
 
 
-- 3\) Coefficient: By entering the number 3, you can enter the limit announced by the provider.\
+- 3\) Coefficient of buffer size: By pressing number 3, you can choose the buffer size factor.\
+ **Note:** the larger buffer size, the more net usage you have, but on the other hand, it can be **detected** by the **provider**
+
+
+- 4\) Coefficient of uploader threads count: By entering the number 4, You can set the number of IPs it can choose.(max=20 normal=7 min=3)\
+  **Note:** that the higher the number, the higher the *CPU consumption* , and the
+  possibility of being *warned or ban* by the **provider**.
+
+
+- 5\) Coefficient of upload/download: By entering the number 5, you can enter the limit announced by the provider.\
   For example, if your ratio should be 10 uploads to 1 download, set the number to 10
 
 
@@ -113,11 +120,14 @@ sudo systemctl restart namizun.service
   must manually enter the amount of uploads and downloads you have had so far.
 
 
-- 4\) Total Upload Before Reboot: By entering the number 4, you can change your upload amount (use the graphs inside the
+- 6\) Total Upload Before Reboot: By entering the number 6, you can change your upload amount (use the graphs inside the
   provider panel and enter the correct amount)
 
 
-- 5\) Total Download Before Reboot: By entering the number 5, you can change your download amount
+- 7\) Total Download Before Reboot: By entering the number 7, you can change your download amount
+
+
+- 9\) Reload: It is used to restart the **namizun**
 
 
 - 0\) Exit: goodbye!
@@ -149,5 +159,3 @@ Your support allows me to continue my work, **fight against Internet censorship 
 `USDT (TRC20) : TDuBY7FpRkaMU1rhQjQa6sqpNdKhmM8Nx3`
 
 `USDT (ERC20) : 0xFAFaf5D1e2e6a11F04e318430ff01031B63A58e1`
-
-`Dash : XeCZbBwgoZpZi3RzqkbELvLVTaUCJY67ZL`
