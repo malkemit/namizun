@@ -24,7 +24,7 @@ def coefficient_of_buffer_size_setter():
     print(f"\n{display.cornsilk}Choose coefficient of buffer size? (max = 6, min = 1)\n\n"
           f"{display.red}Warning: The larger the buffer size, the more likely the provider will notice that "
           f"your traffic is fake, BE CAREFUL!{display.cornsilk}\n")
-    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}5{display.cornsilk}?"))
+    selection = int(input(f"\n{display.cyan}1{display.cornsilk} to {display.cyan}6{display.cornsilk}?"))
     if selection in range(1, 7):
         database.set_parameter('coefficient_buffer_size', selection)
         return main_menu()
@@ -47,11 +47,11 @@ def coefficient_uploader_threads_count_setter():
 def coefficient_of_limitation_setter():
     display.banner()
     print(f"\n{display.cornsilk}What is your limit coefficient?"
-          f"(max = {display.cyan}15{display.cornsilk}, min = {display.cyan}3{display.cornsilk})\n\n"
+          f"(max = {display.cyan}15{display.cornsilk}, min = {display.cyan}2{display.cornsilk})\n\n"
           f"For example, if you need to observe the ratio of {display.cyan}1{display.cornsilk} to "
           f"{display.cyan}10{display.cornsilk}, enter the value of {display.cyan}10{display.cornsilk}")
-    selection = int(input(f"\n{display.cyan}3{display.cornsilk} to {display.cyan}15{display.cornsilk}?"))
-    if selection in range(3, 16):
+    selection = int(input(f"\n{display.cyan}2{display.cornsilk} to {display.cyan}15{display.cornsilk}?"))
+    if selection in range(2, 16):
         database.set_parameter('coefficient_limitation', selection)
         return main_menu()
     else:
