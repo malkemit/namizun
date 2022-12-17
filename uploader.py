@@ -39,4 +39,4 @@ while True:
             uploader_count, upload_size_for_each_ip = multi_udp_uploader(0.3 * total_upload_size, total_uploader)
             remain_uploader -= uploader_count
             remain_upload_size -= uploader_count * upload_size_for_each_ip
-    sleep(randint(30, 150))
+    sleep(randint(5, 30))
