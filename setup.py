@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='namizun_core',
-      version='1.3.3',
+      version='1.3.6',
       description='Asymmetric upload and download',
       author='MalKeMit',
       author_email='khodemalkemit@gmail.com',

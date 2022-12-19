@@ -1,8 +1,11 @@
 from namizun_core import database, ip
 from threading import Thread
 from random import uniform, randint
+from namizun_core.monitor import get_size
 from time import sleep
 from random import choices
+from datetime import datetime
+from pytz import timezone
 import socket
 
 buffer_ranges = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000, 65000]
@@ -10,11 +13,20 @@ total_upload_size_for_each_ip = 0
 uploader_count = 0
 
 
+def store_log(target_ip, game_port, upload_size):
+    file = open('/var/www/namizun/udp.log', 'a')
+    file.write(f"time: {datetime.now(timezone('Asia/Tehran')).strftime('%d/%m/%Y %H:%M:%S')} \t"
+               f"ip: {target_ip} \t"
+               f"port: {game_port} \t"
+               f"size: {get_size(upload_size)}\n")
+    file.close()
+
+
 def start_udp_uploader():
-    global total_upload_size_for_each_ip
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     target_ip, game_port = ip.get_random_ip_port()
     upload_size = int(uniform(total_upload_size_for_each_ip * 0.7, total_upload_size_for_each_ip * 1.2))
+    store_log(target_ip, game_port, upload_size)
     while upload_size >= 0:
         selected_buffer_range = choices(buffer_ranges, database.buffers_weight, k=1)[0]
         buf = int(uniform(selected_buffer_range - 5000, selected_buffer_range))
