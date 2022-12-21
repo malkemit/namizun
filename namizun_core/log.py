@@ -3,7 +3,7 @@ from namizun_core.monitor import get_size
 
 
 def store_restart_namizun_uploader_log():
-    file = open('/var/www/namizun/udp.log', 'a')
+    file = open('/var/www/namizun/namizun.log', 'a')
     file.write(f"date: {get_now_date()} - "
                f"time: {get_now_time()} - "
                f"namizun.service restarted\n")
@@ -11,7 +11,7 @@ def store_restart_namizun_uploader_log():
 
 
 def store_new_upload_loop_log(total_uploader_count, total_upload_size):
-    file = open('/var/www/namizun/udp.log', 'a')
+    file = open('/var/www/namizun/namizun.log', 'a')
     file.write(f"date: {get_now_date()} - "
                f"time: {get_now_time()} - "
                f"new upload loop started - "
@@ -21,7 +21,7 @@ def store_new_upload_loop_log(total_uploader_count, total_upload_size):
 
 
 def store_new_upload_agent_log(uploader_count, upload_size_for_each_ip):
-    file = open('/var/www/namizun/udp.log', 'a')
+    file = open('/var/www/namizun/namizun.log', 'a')
     file.write(f"date: {get_now_date()} - "
                f"time: {get_now_time()} - "
                f"new upload agent started - "
@@ -31,7 +31,7 @@ def store_new_upload_agent_log(uploader_count, upload_size_for_each_ip):
 
 
 def store_new_udp_uploader_log(started_at, target_ip, target_port, upload_size, ended_at):
-    file = open('/var/www/namizun/udp.log', 'a')
+    file = open('/var/www/namizun/namizun.log', 'a')
     file.write(f"date: {get_now_date()} - "
                f"udp uploader - "
                f"[start: {started_at} - "
