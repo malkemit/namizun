@@ -8,7 +8,7 @@ parameters = [
     'total_upload_before_reboot', 'total_download_before_reboot', 'in_submenu']
 namizun_db = None
 prefix = 'namizun_'
-ip_prefix = prefix + 'ip_'
+ip_prefix = f'{prefix}ip_'
 cache_parameters = {}
 buffers_weight = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
@@ -89,10 +89,11 @@ def get_cache_parameter(key):
 
 def get_buffers_weight():
     global buffers_weight
-    result = []
     selected_buffer_size = 2 * get_cache_parameter('coefficient_buffer_size') - 1
-    for buffer_size in range(1, 14):
-        result.append(1 / 2 ** abs(buffer_size - selected_buffer_size))
+    result = [
+        1 / 2 ** abs(buffer_size - selected_buffer_size)
+        for buffer_size in range(1, 14)
+    ]
     buffers_weight = result
 
 
@@ -110,7 +111,7 @@ def set_ip_port_to_database(target_ip, target_port):
 def get_ip_ports_from_database():
     my_db = singleton()
     result = {}
-    keys = my_db.keys(ip_prefix + "*")
+    keys = my_db.keys(f"{ip_prefix}*")
     if len(keys) > 0:
         for key in keys:
             if isinstance(key, bytes):
