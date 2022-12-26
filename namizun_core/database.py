@@ -89,10 +89,11 @@ def get_cache_parameter(key):
 
 def get_buffers_weight():
     global buffers_weight
-    result = []
     selected_buffer_size = 2 * get_cache_parameter('coefficient_buffer_size') - 1
-    for buffer_size in range(1, 14):
-        result.append(1 / 2 ** abs(buffer_size - selected_buffer_size))
+    result = [
+        1 / 2 ** abs(buffer_size - selected_buffer_size)
+        for buffer_size in range(1, 14)
+    ]
     buffers_weight = result
 
 
