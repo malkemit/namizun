@@ -93,16 +93,16 @@ def reload_namizun_service():
 
 def fake_udp_uploader_running_status():
     if database.get_parameter('fake_udp_uploader_running'):
-        return display.green + "True"
+        return f"{display.green}True"
     else:
-        return display.red + "False"
+        return f"{display.red}False"
 
 
 def speedtest_uploader_running_status():
     if database.get_parameter('speedtest_uploader_running'):
-        return display.green + "True"
+        return f"{display.green}True"
     else:
-        return display.red + "False"
+        return f"{display.red}False"
 
 
 def main_menu():
