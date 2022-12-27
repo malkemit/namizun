@@ -1,5 +1,5 @@
 from namizun_core.time import get_now_date, get_now_time
-from namizun_core.monitor import get_size
+from namizun_core.network import get_size
 
 
 def store_restart_namizun_uploader_log():

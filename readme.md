@@ -38,10 +38,10 @@ git pull origin master
 python3 -m venv /var/www/namizun/venv
 ```
 
-- 5\) Install the project requirements with pip by **setup.py**:
+- 5\) Install the project requirements with pip by **setup.py** (namizun_core & namizun_menu):
 
 ```bash
-source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install wheel && pip install . && deactivate
+cd /var/www/namizun && source /var/www/namizun/venv/bin/activate && pip install wheel && pip install namizun_core/ namizun_menu/ && deactivate
 ```
 
 - 6\) Create service for uploader.py (for running namizun script):
@@ -79,66 +79,12 @@ ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/n
 - With the following command, you can update the script that you have already installed:
 
 ```bash
-cd /var/www/namizun && rm range_ips || true && git reset --hard HEAD && git pull origin master && source /var/www/namizun/venv/bin/activate && cd /var/www/namizun && pip install . && deactivate && systemctl daemon-reload && chmod +x /usr/local/bin/namizun
+cd /var/www/namizun && git reset --hard HEAD && git pull origin master && source /var/www/namizun/venv/bin/activate && pip install namizun_core/ namizun_menu/ && deactivate && systemctl daemon-reload && chmod +x /usr/local/bin/namizun
 ```
 
 ## Configuration
 
-- You can use **namizun** tool to configure monitoring. Type the following command to run it:
-
-```bash
-namizun
-```
-
-- **Note:** Applying changes until **the end of the uploader cycle does not affect.**\
-  In fact, after the end of a round of the uploader cycle, the new configurations will have an effect.\
-  If you want the recorded event to take effect quickly, you can reload the **core.py** with the following command:
-
-```bash
-sudo systemctl restart namizun.service
-```
-
-## Command list
-
-- this is the menu!
-
-![menu.py](else/menu.png?raw=true)
-
-- 1\) Fake udp uploader running : You can activate or deactivate the uploader by entering the number 1\
-
-
-- 2\) Speedtest uploader running: It is currently not active and will be added soon\
-
-
-- 3\) Coefficient of buffer size: By pressing number 3, you can choose the buffer size factor.\
- **Note:** the larger buffer size, the more net usage you have, but on the other hand, it can be **detected** by the **provider**
-
-
-- 4\) Coefficient of uploader threads count: By entering the number 4, You can set the number of IPs it can choose.(max=20 normal=7 min=3)\
-  **Note:** that the higher the number, the higher the *CPU consumption* , and the
-  possibility of being *warned or ban* by the **provider**.
-
-
-- 5\) Coefficient of upload/download: By entering the number 5, you can enter the limit announced by the provider.\
-  For example, if your ratio should be 10 uploads to 1 download, set the number to 10
-
-
-  **Important: Your upload and download information will be counted from your last reboot.**\
-  In fact, as soon as you reboot the server, the amount of downloads and uploads in the program will be zero, and you
-  must manually enter the amount of uploads and downloads you have had so far.
-
-
-- 6\) Total Upload Before Reboot: By entering the number 6, you can change your upload amount (use the graphs inside the
-  provider panel and enter the correct amount)
-
-
-- 7\) Total Download Before Reboot: By entering the number 7, you can change your download amount
-
-
-- 9\) Reload: It is used to restart the **namizun**
-
-
-- 0\) Exit: goodbye!
+- see our tutorial : [command list in persian](https://telegra.ph/commandlist-of-namizun-12-26)
 
 ## Notes:
 - In this script, you don't need to buy a download host or another server or even upload to your foreign server.\
@@ -164,6 +110,6 @@ In this way, your traffic will be distributed among more IPs and will prevent yo
 If you enjoyed this script you could donate me by donating!\
 Your support allows me to continue my work, **fight against Internet censorship in Iran**
 
-`USDT (TRC20) : TDuBY7FpRkaMU1rhQjQa6sqpNdKhmM8Nx3`
+`USDT (TRC20) or TRON : TDuBY7FpRkaMU1rhQjQa6sqpNdKhmM8Nx3`
 
 `USDT (ERC20) : 0xFAFaf5D1e2e6a11F04e318430ff01031B63A58e1`

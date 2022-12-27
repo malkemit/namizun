@@ -23,7 +23,7 @@ def start_udp_uploader():
         buf = int(uniform(selected_buffer_range - 5000, selected_buffer_range))
         if sock.sendto(bytes(buf), (target_ip, game_port)):
             remain_upload_size -= buf
-            sleep(0.001 * int(uniform(5, 26)))
+            sleep(0.001 * int(uniform(5, 26)) / database.get_cache_parameter('coefficient_buffer_sending_speed'))
     sock.close()
     store_new_udp_uploader_log(started_time, target_ip, game_port, upload_size, get_now_time())
 

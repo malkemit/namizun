@@ -3,9 +3,10 @@ from os import system, path
 from random import randint
 
 parameters = [
-    'range_ips', 'fake_udp_uploader_running', 'speedtest_uploader_running',
-    'coefficient_buffer_size', 'coefficient_uploader_threads_count', 'coefficient_limitation',
-    'total_upload_before_reboot', 'total_download_before_reboot', 'in_submenu']
+    'fake_udp_uploader_running',
+    'coefficient_buffer_size', 'coefficient_uploader_threads_count', 'coefficient_buffer_sending_speed',
+    'range_ips', 'in_submenu', 'coefficient_limitation',
+    'total_upload_cache', 'total_download_cache', 'download_amount_synchronizer', 'upload_amount_synchronizer']
 namizun_db = None
 prefix = 'namizun_'
 ip_prefix = f'{prefix}ip_'
@@ -29,17 +30,21 @@ def get_default(key):
             return open('/var/www/namizun/range_ips').read()
     elif key == 'fake_udp_uploader_running':
         return True
-    elif key == 'speedtest_uploader_running':
-        return False
     elif key == 'coefficient_buffer_size':
         return 1
     elif key == 'coefficient_uploader_threads_count':
         return 3
+    elif key == 'coefficient_buffer_sending_speed':
+        return 1
     elif key == 'coefficient_limitation':
         return 6
-    elif key == 'total_upload_before_reboot':
+    elif key == 'total_upload_cache':
         return 0
-    elif key == 'total_download_before_reboot':
+    elif key == 'total_download_cache':
+        return 0
+    elif key == 'upload_amount_synchronizer':
+        return 0
+    elif key == 'download_amount_synchronizer':
         return 0
     elif key == 'in_submenu':
         return False
@@ -54,10 +59,11 @@ def check_datatype(value):
         return True
     elif value == 'None':
         return None
-    elif isinstance(value, str) and value.isdigit():
-        return int(value)
     else:
-        return value
+        try:
+            return int(value)
+        except ValueError:
+            return value
 
 
 def get_parameter(key):
@@ -90,11 +96,10 @@ def get_cache_parameter(key):
 def get_buffers_weight():
     global buffers_weight
     selected_buffer_size = 2 * get_cache_parameter('coefficient_buffer_size') - 1
-    result = [
+    buffers_weight = [
         1 / 2 ** abs(buffer_size - selected_buffer_size)
         for buffer_size in range(1, 14)
     ]
-    buffers_weight = result
 
 
 def set_parameters_to_cache():
