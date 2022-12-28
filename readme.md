@@ -2,10 +2,10 @@
 
 This project is used to remove the limitation of asymmetric ratio for uploading and downloading Iranian servers
 
-## One command installation
+## One line installation command:
 
 ```bash
-sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/setup.sh | bash
+sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/else/setup.sh | bash
 ```
 
 ## Manual installation
@@ -18,19 +18,19 @@ sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/setup.sh | b
 sudo apt install python3-pip python3-venv redis git -y
 ```
 
-- 2\) start the redis service
+- Note: Sometimes Redis does not start automatically, start it with the following command
 
 ```bash
 sudo systemctl start redis.service
 ```
 
-- 3\) you need to create a directory to clone the project:
+- 2\) you need to create a directory to clone the project:
 
 ```bash
 mkdir -p /var/www/namizun && cd /var/www/namizun
 ```
 
-- 4\) Clone the project with Git:
+- 3\) Clone the project with Git:
 
 ```bash
 git init
@@ -44,43 +44,31 @@ git remote add origin https://github.com/malkemit/namizun.git
 git pull origin master
 ```
 
-- 5\) make virtual environment:
+- 4\) make virtual environment:
 
 ```bash
 python3 -m venv /var/www/namizun/venv
 ```
 
-- 6\) Install the project requirements with pip by **setup.py** (namizun_core & namizun_menu):
+- 5\) Install the project requirements with pip by **setup.py** (namizun_core & namizun_menu):
 
 ```bash
 cd /var/www/namizun && source /var/www/namizun/venv/bin/activate && pip install wheel && pip install namizun_core/ namizun_menu/ && deactivate
 ```
 
-- 7\) Create service for uploader.py (for running namizun script):
+- 6\) Create service for uploader.py (for running namizun script):
 
 ```bash
 ln -s /var/www/namizun/else/namizun.service /etc/systemd/system/
 ```
 
-- 8\) Reload the service files to include the new service:
+- 7\) Reload the service files to include the new service and start **namizun.service** :
 
 ```bash
-sudo systemctl daemon-reload
+sudo systemctl daemon-reload && sudo systemctl enable namizun.service && sudo systemctl start namizun.service
 ```
 
-- 9\) To enable your service on every reboot:
-
-```bash
-sudo systemctl enable namizun.service
-```
-
-- 10\) Start namizun service:
-
-```bash
-sudo systemctl start namizun.service
-```
-
-- 11\) Create **namizun** command to execute **menu.py**
+- 8\) Create **namizun** command to execute **menu.py**
 
 ```bash
 ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/namizun
