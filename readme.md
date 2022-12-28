@@ -5,7 +5,7 @@ This project is used to remove the limitation of asymmetric ratio for uploading 
 ## One line installation command:
 
 ```bash
-sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/else/setup.sh | bash
+sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/else/setup.sh | sudo bash
 ```
 
 ## Manual installation
