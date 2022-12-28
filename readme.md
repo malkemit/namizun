@@ -2,7 +2,13 @@
 
 This project is used to remove the limitation of asymmetric ratio for uploading and downloading Iranian servers
 
-## Installation
+## One command installation
+
+```bash
+sudo curl https://raw.githubusercontent.com/malkemit/namizun/master/setup.sh | bash
+```
+
+## Manual installation
 
 **Important Note : use it on ubuntu +20 (python +3.8)**
 
