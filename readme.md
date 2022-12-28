@@ -12,13 +12,19 @@ This project is used to remove the limitation of asymmetric ratio for uploading 
 sudo apt install python3-pip python3-venv redis git -y
 ```
 
-- 2\) you need to create a directory to clone the project:
+- 2\) start the redis service
+
+```bash
+sudo systemctl start redis.service
+```
+
+- 3\) you need to create a directory to clone the project:
 
 ```bash
 mkdir -p /var/www/namizun && cd /var/www/namizun
 ```
 
-- 3\) Clone the project with Git:
+- 4\) Clone the project with Git:
 
 ```bash
 git init
@@ -32,43 +38,43 @@ git remote add origin https://github.com/malkemit/namizun.git
 git pull origin master
 ```
 
-- 4\) make virtual environment:
+- 5\) make virtual environment:
 
 ```bash
 python3 -m venv /var/www/namizun/venv
 ```
 
-- 5\) Install the project requirements with pip by **setup.py** (namizun_core & namizun_menu):
+- 6\) Install the project requirements with pip by **setup.py** (namizun_core & namizun_menu):
 
 ```bash
 cd /var/www/namizun && source /var/www/namizun/venv/bin/activate && pip install wheel && pip install namizun_core/ namizun_menu/ && deactivate
 ```
 
-- 6\) Create service for uploader.py (for running namizun script):
+- 7\) Create service for uploader.py (for running namizun script):
 
 ```bash
 ln -s /var/www/namizun/else/namizun.service /etc/systemd/system/
 ```
 
-- 7\) Reload the service files to include the new service:
+- 8\) Reload the service files to include the new service:
 
 ```bash
 sudo systemctl daemon-reload
 ```
 
-- 8\) To enable your service on every reboot:
+- 9\) To enable your service on every reboot:
 
 ```bash
 sudo systemctl enable namizun.service
 ```
 
-- 9\) Start namizun service:
+- 10\) Start namizun service:
 
 ```bash
 sudo systemctl start namizun.service
 ```
 
-- 10\) Create **namizun** command to execute **menu.py**
+- 11\) Create **namizun** command to execute **menu.py**
 
 ```bash
 ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/namizun
