@@ -7,6 +7,7 @@ setup(name='namizun_core',
       author_email='khodemalkemit@gmail.com',
       url='https://github.com/malkemit/namizun',
       setup_requires=['wheel'],
+      py_modules=['id', 'udp', 'time', 'database', 'log', 'network'],
       install_requires=['psutil==5.9.4',
                         'redis==4.3.5',
                         'pytz==2022.6']

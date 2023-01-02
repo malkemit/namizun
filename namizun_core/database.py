@@ -17,7 +17,10 @@ buffers_weight = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 def singleton():
     global namizun_db
     if namizun_db is None:
-        namizun_db = Redis()
+        try:
+            namizun_db = Redis(host='redis', port=6379)
+        except Exception as e:            
+            namizun_db = Redis()
     return namizun_db
 
 
