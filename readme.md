@@ -82,6 +82,19 @@ ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/n
 cd /var/www/namizun && git reset --hard HEAD && git pull origin master && source /var/www/namizun/venv/bin/activate && pip install namizun_core/ namizun_menu/ && deactivate && systemctl daemon-reload && chmod +x /usr/local/bin/namizun
 ```
 
+## Docker
+
+Just run the up command of the docker compose (make sure you have docker, docker-compose-plugin installed)
+```bash
+docker compose up --build -d
+```
+
+Then **Namizun** starts running in the background. To access the dashboard you should run the following commands.
+```bash
+docker compose exec app bash
+```
+with this command you can access the bash of the container, then just run the `namizun` command to see the dashboard.
+
 ## Configuration
 
 - see our tutorial : [command list in persian](https://telegra.ph/commandlist-of-namizun-12-26)
