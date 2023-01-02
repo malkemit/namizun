@@ -1,0 +1,16 @@
+async-timeout==4.0.2
+autopep8==2.0.1
+colored==1.4.4
+namizun-core @ file:///var/www/namizun/namizun_core
+namizun-menu @ file:///var/www/namizun/namizun_menu
+packaging==22.0
+prettytable==3.5.0
+psutil==5.9.4
+pycodestyle==2.10.0
+pyfiglet==0.8.post1
+python-dotenv==0.21.0
+pytz==2022.6
+redis==4.3.5
+tomli==2.0.1
+wcwidth==0.2.5
+
