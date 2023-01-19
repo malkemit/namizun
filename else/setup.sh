@@ -37,7 +37,7 @@ if [ $? != 0 ]; then
 fi
 
 echo 'Installing project dependencies (step 5)'
-cd /var/www/namizun && source /var/www/namizun/venv/bin/activate && pip install wheel && pip install namizun_core/ namizun_menu/ && deactivate
+cd /var/www/namizun && source /var/www/namizun/venv/bin/activate && pip install wheel -i https://pypi.tuna.tsinghua.edu.cn/simple/ && pip install namizun_core/ namizun_menu/ && deactivate
 if [ $? != 0 ]; then
   echo "Dependencies doesn't installed correctly"
   exit
