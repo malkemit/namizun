@@ -82,12 +82,15 @@ ln -s /var/www/namizun/else/namizun /usr/local/bin/ && chmod +x /usr/local/bin/n
 cd /var/www/namizun && git reset --hard HEAD && git pull origin master && source /var/www/namizun/venv/bin/activate && pip install namizun_core/ namizun_menu/ && deactivate && systemctl daemon-reload && chmod +x /usr/local/bin/namizun
 ```
 
-## Disable
-
-- With the following command, you can disable and stop the service:
+## Stop
 
 ```bash
-sudo systemctl disable namizun.service && sudo systemctl stop namizun.service
+sudo systemctl stop namizun.service
+```
+## Stop Permanently
+
+```bash
+sudo systemctl disable namizun.service
 ```
 
 ## Configuration
