@@ -2,6 +2,27 @@
 
 This project is used to remove the limitation of asymmetric ratio for uploading and downloading Iranian servers
 
+## Dockerized installation
+
+```bash
+git clone https://github.com/salehi/namizun
+cd namizun
+docker-compose pull
+docker-compose up -d
+```
+
+### You need menu to adjust settings?
+
+```bash
+docker-compose run --rm --entrypoint bash namizun
+python3 menu.py
+```
+
+### You want to build docker image by yourself?
+```bash
+docker-compose build namizun
+```
+
 ## One line installation command:
 
 ```bash
