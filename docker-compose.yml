@@ -6,7 +6,7 @@ services:
     command: redis-server --maxmemory 100mb --save "" --appendonly no --bind 127.0.0.1
     network_mode: host
   namizun: &ref
-    image: namizun
+    image: s4l3h1/namizun:ubuntu-20.04
     build: .
     network_mode: host
   uploader:
