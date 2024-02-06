@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+    command: redis-server --maxmemory 100mb --save "" --appendonly no --bind 127.0.0.1
+    network_mode: host
+  namizun: &ref
+    image: namizun
+    build: .
+    network_mode: host
+  uploader:
+    <<: *ref
+    restart: always
+    command: python3 uploader.py
